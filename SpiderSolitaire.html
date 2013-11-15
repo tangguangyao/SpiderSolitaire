@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>蜘蛛纸牌</title>
+<style type="text/css">
+body { -moz-user-select: none; -webkit-user-select: none; }
+body, div, span, a, cite, input { font-size: 14px; font-family: "Arial", "宋体"; }
+body { padding: 10px; background-color: #eee; }
+#main { position: relative; width: 1200px; height: 600px; margin: 0px auto; border: 2px solid #33ee99; background: #333 url(images/bg2.jpg) no-repeat center; }
+#bar { position: absolute; bottom: 0px; width: 100%; height: 35px; border-top: 1px solid #33cc99; background-color: rgba(255, 255, 255, .4); }
+#bar span { display: inline-block; width: 80px; line-height: 35px; margin-left: 10px; float:right; }
+#bar cite { color: #ff3300; }
+#bar input { width: 85px; height: 35px; color: #006600; float: left; }
+
+.poker { position: absolute; width: 105px; height: 148px; border-radius: 4px; background: url(images/poker.png) no-repeat; cursor: default; }
+.poker:hover { box-shadow: 0px 0px 5px #0033cc; }
+.fixed:hover { box-shadow: none; }
+.drag_box { position: absolute; width: 105px; left: 0px; top: 0px; }
+
+#pop { position: absolute; width: 100%; height: 100%; background-color: rgba(255, 255, 255, 0); z-index: 9999; display: none; }
+.win { width: 400px; height: 160px; margin: 150px auto; border: 3px solid #669933; border-radius: 10px; background: -moz-linear-gradient(top, rgba(255, 204, 0, 0.5), rgba(255, 255, 255, 0.5)); background: -webkit-gradient(linear, 0 0, 0 100%, from(rgba(255, 255, 255, 0.5)), to(rgba(255, 204, 0, 0.5))); box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.75); text-align: center; }
+.win p { font-size: 36px; font-family: "微软雅黑"; color: #339900; text-align: center; margin-bottom: 16px; }
+.win input { width: 100px; height: 35px; color: #006600; }
+
+#copyright { text-align: center; line-height: 200%; color: #666666; }
+</style>
+<script type="text/javascript" src="lib/jquery-1.8.0.min.js"></script>
+<script type="text/javascript" src="lib/Spider.js"></script>
+
+<script type="text/javascript">
+$(function() {
+	window.s = new Spider();
+	$("#playBtn").bind("click", function() {
+		if(this.value==="开始"){
+			s.start();
+			this.value = "重新开始";
+		}else{
+			s.replay();
+		}
+	});
+	$("#undoBtn").bind("click", function() {
+		s.undo(s);
+	});
+	$("#replayBtn").bind("click", function() {
+		s.replay();
+	});
+});
+</script>
+
+</head>
+<body>
+<div id="main">
+	<div id="bar">
+		<span>移牌：<cite id="step">0</cite></span>
+		<span>得分：<cite id="score">0</cite></span>
+		<input id="playBtn" type="button" value="开始" />
+		<input id="undoBtn" type="button" value="后退" />
+	</div>
+	<div id="pop">
+		<div class="win">
+			<p>恭喜您赢了！</p>
+			<input id="replayBtn" type="button" value="再来一盘" />
+		</div>
+	</div>
+</div>
+<div id="copyright">本程序仅供学习使用。作者：shuosuo&nbsp;&nbsp;&nbsp;&nbsp;联系方式：shuosuo@163.com</div>
+
+</body>
+</html>
